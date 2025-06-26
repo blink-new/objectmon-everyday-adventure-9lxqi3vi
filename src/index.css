@@ -1,0 +1,188 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Game Boy Color Palette */
+:root {
+  --gb-lightest: #e0f8d0;
+  --gb-light: #88c070;
+  --gb-dark: #346856;
+  --gb-darkest: #081820;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-[var(--gb-darkest)] text-[var(--gb-lightest)] overflow-hidden;
+    font-family: 'Courier New', monospace;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+  }
+}
+
+/* Game Boy Screen Effect */
+.gameboy-screen {
+  background: var(--gb-lightest);
+  border: 8px solid var(--gb-darkest);
+  border-radius: 4px;
+  box-shadow: 
+    inset 0 0 0 2px var(--gb-dark),
+    inset 0 0 0 4px var(--gb-light),
+    0 0 20px rgba(8, 24, 32, 0.5);
+  image-rendering: pixelated;
+}
+
+/* Pixel Font */
+.pixel-font {
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+/* Game Boy UI Elements */
+.gb-button {
+  background: var(--gb-light);
+  color: var(--gb-darkest);
+  border: 2px solid var(--gb-darkest);
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: none;
+}
+
+.gb-button:hover {
+  background: var(--gb-dark);
+  color: var(--gb-lightest);
+}
+
+.gb-button:active {
+  background: var(--gb-darkest);
+  color: var(--gb-lightest);
+}
+
+/* Text Box Styles */
+.text-box {
+  background: var(--gb-lightest);
+  color: var(--gb-darkest);
+  border: 3px solid var(--gb-darkest);
+  border-radius: 0;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+/* Battle UI */
+.battle-ui {
+  background: var(--gb-lightest);
+  border: 4px solid var(--gb-darkest);
+}
+
+/* Health Bar */
+.health-bar {
+  background: var(--gb-darkest);
+  border: 2px solid var(--gb-darkest);
+}
+
+.health-fill {
+  background: var(--gb-light);
+  transition: width 0.5s ease;
+}
+
+.health-fill.low {
+  background: var(--gb-dark);
+}
+
+.health-fill.critical {
+  background: var(--gb-darkest);
+}
+
+/* Menu Styles */
+.menu {
+  background: var(--gb-lightest);
+  border: 3px solid var(--gb-darkest);
+  color: var(--gb-darkest);
+}
+
+.menu-item {
+  border-bottom: 1px solid var(--gb-dark);
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.menu-item:hover {
+  background: var(--gb-light);
+}
+
+.menu-item.selected {
+  background: var(--gb-dark);
+  color: var(--gb-lightest);
+}
+
+/* Sprite Container */
+.sprite {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+/* Animations */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-2px); }
+  75% { transform: translateX(2px); }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-100%); }
+  to { transform: translateY(0); }
+}
+
+.shake { animation: shake 0.5s ease-in-out; }
+.bounce { animation: bounce 0.6s ease-in-out; }
+.fade-in { animation: fadeIn 0.3s ease-in; }
+.slide-down { animation: slideDown 0.3s ease-out; }
+
+/* Grid for tile-based movement */
+.tile-grid {
+  display: grid;
+  grid-template-columns: repeat(20, 16px);
+  grid-template-rows: repeat(18, 16px);
+  gap: 0;
+}
+
+.tile {
+  width: 16px;
+  height: 16px;
+  image-rendering: pixelated;
+}
+
+/* Game Boy screen aspect ratio */
+.game-screen {
+  width: 320px;
+  height: 288px;
+  max-width: 90vw;
+  max-height: 90vh;
+  aspect-ratio: 10/9;
+}
+
+/* Responsive scaling */
+@media (max-width: 768px) {
+  .game-screen {
+    width: 100vw;
+    height: 90vh;
+  }
+}
